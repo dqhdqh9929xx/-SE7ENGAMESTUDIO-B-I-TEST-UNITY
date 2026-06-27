@@ -28,8 +28,11 @@ public class Goal : MonoBehaviour
                 GameObject vfx = Instantiate(goalVfxPrefab, contactPoint, Quaternion.identity);
                 Destroy(vfx, vfxDestroyDelay); // Tự động hủy VFX sau vài giây
                 
-                // log lại vị trí và xem vfx đã thực sự xuất hiện chưa
-                Debug.Log($"[Goal] Đã tạo VFX '{vfx.name}' tại vị trí {contactPoint}");
+                ParticleSystem ps = vfx.GetComponent<ParticleSystem>();
+                if (ps != null)
+                {
+                    ps.Play();
+                }
             }
             
             MainCamera mainCam = FindObjectOfType<MainCamera>();

@@ -34,11 +34,11 @@ public class AutoKick : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
+    // // Update is called once per frame
+    // void Update()
+    // {
 
-    }
+    // }
 
     /// <summary>
     /// Hàm được gọi khi bấm nút AutoKick.
@@ -99,11 +99,11 @@ public class AutoKick : MonoBehaviour
             }
         }
 
-        if (nearestGoal == null)
-        {
-            Debug.LogWarning("[AutoKick] Không tìm thấy goal hợp lệ!");
-            return;
-        }
+        // if (nearestGoal == null)
+        // {
+        //     Debug.LogWarning("[AutoKick] Không tìm thấy goal hợp lệ!");
+        //     return;
+        // }
 
         Debug.Log($"[AutoKick] Goal gần quả bóng nhất: {nearestGoal.name} (khoảng cách: {minGoalDistance:F2}m)");
 
@@ -124,11 +124,11 @@ public class AutoKick : MonoBehaviour
     private void KickBallToGoal(GameObject ball, GameObject goal)
     {
         Rigidbody rb = ball.GetComponent<Rigidbody>();
-        if (rb == null)
-        {
-            Debug.LogWarning($"[AutoKick] {ball.name} không có Rigidbody, không thể đá!");
-            return;
-        }
+        // if (rb == null)
+        // {
+        //     Debug.LogWarning($"[AutoKick] {ball.name} không có Rigidbody, không thể đá!");
+        //     return;
+        // }
 
         // Tính hướng từ bóng đến goal
         Vector3 direction = (goal.transform.position - ball.transform.position).normalized;

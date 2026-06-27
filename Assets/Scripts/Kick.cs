@@ -17,11 +17,11 @@ public class Kick : MonoBehaviour
 
     public void OnKickButtonPressed()
     {
-        if (kickManager == null)
-        {
-            Debug.LogWarning("Kick: KickManager chưa được gán!");
-            return;
-        }
+        // if (kickManager == null)
+        // {
+        //     Debug.LogWarning("Kick: KickManager chưa được gán!");
+        //     return;
+        // }
 
         Collider ballCollider = kickManager.NearbyBall;
         if (ballCollider == null)
@@ -31,18 +31,18 @@ public class Kick : MonoBehaviour
         }
 
         Rigidbody ballRb = ballCollider.GetComponent<Rigidbody>();
-        if (ballRb == null)
-        {
-            Debug.LogWarning("Kick: Quả bóng không có Rigidbody!");
-            return;
-        }
+        // if (ballRb == null)
+        // {
+        //     Debug.LogWarning("Kick: Quả bóng không có Rigidbody!");
+        //     return;
+        // }
 
         Transform nearestGoal = kickManager.GetNearestGoal();
-        if (nearestGoal == null)
-        {
-            Debug.LogWarning("Kick: Không tìm thấy goal!");
-            return;
-        }
+        // if (nearestGoal == null)
+        // {
+        //     Debug.LogWarning("Kick: Không tìm thấy goal!");
+        //     return;
+        // }
 
         Vector3 directionToGoal = (nearestGoal.position - ballCollider.transform.position).normalized;
 

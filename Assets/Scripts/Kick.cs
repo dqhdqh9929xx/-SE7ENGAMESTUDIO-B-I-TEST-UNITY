@@ -60,5 +60,7 @@ public class Kick : MonoBehaviour
         {
             mainCam.FollowBall(ballCollider.transform);
         }
+
+        Destroy(ballCollider.gameObject, 2f);
     }
 }

@@ -146,7 +146,7 @@ public class AutoKick : MonoBehaviour
         MainCamera mainCam = FindObjectOfType<MainCamera>();
         if (mainCam != null)
         {
-            mainCam.FollowBallTemporary(ball.transform, 2f);
+            mainCam.FollowBall(ball.transform);
         }
 
         // Tiêu hủy bóng sau 3 giây để loại trừ khỏi những lần AutoKick tiếp theo

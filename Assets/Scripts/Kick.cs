@@ -58,7 +58,7 @@ public class Kick : MonoBehaviour
         MainCamera mainCam = FindObjectOfType<MainCamera>();
         if (mainCam != null)
         {
-            mainCam.FollowBallTemporary(ballCollider.transform, 2f);
+            mainCam.FollowBall(ballCollider.transform);
         }
     }
 }

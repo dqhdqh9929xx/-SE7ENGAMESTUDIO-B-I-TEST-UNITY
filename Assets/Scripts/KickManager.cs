@@ -15,11 +15,11 @@ public class KickManager : MonoBehaviour
 
     public Collider NearbyBall { get; private set; }
 
-    void Start()
-    {
-        if (btnKick != null)
-            btnKick.SetActive(false);
-    }
+    // void Start()
+    // {
+    //     if (btnKick != null)
+    //         btnKick.SetActive(false);
+    // }
 
     void Update()
     {

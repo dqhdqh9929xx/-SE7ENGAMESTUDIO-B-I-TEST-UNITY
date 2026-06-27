@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class Kick : MonoBehaviour
 {
     [Header("Kick Settings")]
-    [SerializeField] private float kickForce = 12f;
+    [SerializeField] private float kickForce = 15f;
     [SerializeField] private float kickUpwardAngle = 15f;  // độ cao khi bóng bay
 
     private KickManager kickManager;
@@ -54,5 +54,11 @@ public class Kick : MonoBehaviour
         ballRb.AddForce(directionToGoal * kickForce, ForceMode.Impulse);
 
         Debug.Log($"Kick: Bóng bay về goal '{nearestGoal.name}'");
+
+        MainCamera mainCam = FindObjectOfType<MainCamera>();
+        if (mainCam != null)
+        {
+            mainCam.FollowBallTemporary(ballCollider.transform, 2f);
+        }
     }
 }

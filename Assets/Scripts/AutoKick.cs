@@ -22,6 +22,8 @@ public class AutoKick : MonoBehaviour
     [Header("Nút AutoKick (Canvas UI)")]
     public Button btnAutoKick;
 
+    private bool isKicking = false; // Cờ chống spam
+
     // Start is called before the first frame update
     void Start()
     {
@@ -44,6 +46,12 @@ public class AutoKick : MonoBehaviour
     /// </summary>
     public void OnClickedBtnAutoKick()
     {
+        if (isKicking)
+        {
+            Debug.Log("[AutoKick] Đang sút bóng, vui lòng chờ...");
+            return;
+        }
+
         // --- Bước 1: Kiểm tra độ dài khoảng cách 5 quả bóng so với Jammo ---
         GameObject[] balls = new GameObject[] { ball1, ball2, ball3, ball4, ball5 };
 
@@ -100,7 +108,14 @@ public class AutoKick : MonoBehaviour
         Debug.Log($"[AutoKick] Goal gần quả bóng nhất: {nearestGoal.name} (khoảng cách: {minGoalDistance:F2}m)");
 
         // --- Bước 3: Đá quả bóng xa nhất vào goal gần nhất ---
+        isKicking = true;
         KickBallToGoal(farthestBall, nearestGoal);
+        Invoke("ResetKickFlag", 2f);
+    }
+
+    private void ResetKickFlag()
+    {
+        isKicking = false;
     }
 
     /// <summary>
@@ -123,9 +138,19 @@ public class AutoKick : MonoBehaviour
         rb.angularVelocity = Vector3.zero;
 
         // Tác dụng lực đẩy bóng về phía goal
-        float kickForce = 10f;
+        float kickForce = 15f;
         rb.AddForce(direction * kickForce, ForceMode.Impulse);
 
         Debug.Log($"[AutoKick] Đá {ball.name} về phía {goal.name} với lực {kickForce}!");
+
+        MainCamera mainCam = FindObjectOfType<MainCamera>();
+        if (mainCam != null)
+        {
+            mainCam.FollowBallTemporary(ball.transform, 2f);
+        }
+
+        // Tiêu hủy bóng sau 3 giây để loại trừ khỏi những lần AutoKick tiếp theo
+        // Camera sẽ follow bóng trong 2 giây, nên 3 giây là thời gian an toàn để bóng không bị mất đột ngột lúc camera đang nhìn
+        Destroy(ball, 2f);
     }
 }
